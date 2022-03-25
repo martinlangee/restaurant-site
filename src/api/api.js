@@ -38,7 +38,7 @@ export function getAllCategories(setCategories) {
     Axios.get(`${baseUrl}categories.php`)
         .then(res => {
             setCategories(res.data.categories);
-            console.log(res.data.categories);
+            //console.log(res.data.categories);
         })
         .catch(e => console.log(e.message));
 }
@@ -52,5 +52,15 @@ export async function getRandomMeals(setRandomMeals) {
     }
 
     await Promise.all([getRandomMeal(), getRandomMeal(), getRandomMeal(), getRandomMeal(), getRandomMeal(), getRandomMeal(), getRandomMeal(), getRandomMeal(), getRandomMeal(), getRandomMeal(), ]);
+    console.log(meals);
     setRandomMeals(meals);
+}
+
+export function searchMealsByName(setMeals, name) {
+    Axios.get(`${baseUrl}search.php?s=${name}`)
+        .then(res => {
+            setMeals(res.data.meals);
+            console.log(res.data.meals);
+        })
+        .catch(e => console.log(e.message));
 }
