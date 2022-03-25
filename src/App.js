@@ -1,7 +1,26 @@
-import Menu from "./components/Menu";
+import getAllCategories from "./api/api";
+import { useState, useEffect } from "react";
 
 const App = () => {
-  return <Menu />;
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    getAllCategories(setCategories);
+  }, []);
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <ul>
+          {categories
+            ? categories.map((cat) => (
+                <li key={cat.idCategory}>{cat.strCategory}</li>
+              ))
+            : "Loading data..."}
+        </ul>
+      </header>
+    </div>
+  );
 };
 
 export default App;
