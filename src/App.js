@@ -1,18 +1,17 @@
-import logo from "./logo.svg";
-import "./App.css";
 import getAllCategories from "./api/api";
 import { useState, useEffect } from "react";
+import Menu from "./components/Menu";
 
-function App() {
-  const [categories, setCategories] = useState([]);
+const App = () => {
+  /* const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     getAllCategories(setCategories);
-  }, []);
+  }, []); */
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div>
+      {/* <header className="App-header">
         <ul>
           {categories
             ? categories.map((cat) => (
@@ -20,9 +19,10 @@ function App() {
               ))
             : "Loading data..."}
         </ul>
-      </header>
+      </header> */}
+      <Menu />
     </div>
   );
-}
+};
 
 export default App;
