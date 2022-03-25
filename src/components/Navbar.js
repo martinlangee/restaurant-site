@@ -27,6 +27,7 @@ function Navbar() {
 				<Link to='/menu'> Menu </Link>
 				<Link to='/profil'> Profil </Link>
 				<Link to='/order'> Order </Link>
+				<Link to='/reserve'> Reserve </Link>
 
 				<button onClick={toggleNavbar}>
 					<ReorderIcon />

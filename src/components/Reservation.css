@@ -2,7 +2,6 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 700px;
 	border: 2px solid black;
 	border-radius: 20px;
 	padding: 10px;
@@ -57,7 +56,7 @@ input:not(.react-datetime-picker__inputGroup__input) {
 	padding: 5px;
 	color: black;
 	border: 1px solid black;
-	margin-right: 35px;
+	margin-left: 100px;
 }
 
 #personSelect {

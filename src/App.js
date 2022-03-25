@@ -5,6 +5,7 @@ import Home from './components/Home';
 import Profil from './components/Profil';
 import Menu from './components/Menu';
 import Basket from './components/Basket';
+import Reservation from './components/Reservation';
 import { Routes, Route } from 'react-router-dom';
 import { getAllCategories } from './api/api.js';
 
@@ -26,6 +27,7 @@ function App() {
 				<Route path='/profil' element={<Profil />} />
 				<Route path='/menu' element={<Menu />} />
 				<Route path='/order' element={<Basket />} />
+				<Route path='/reserve' element={<Reservation />} />
 			</Routes>
 			<Footer />
 		</div>

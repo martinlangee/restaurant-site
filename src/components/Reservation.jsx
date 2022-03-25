@@ -62,11 +62,14 @@ export default function Reservation() {
 				</div>
 				<div></div>
 				<div></div>
-			</div>
-			<div className='Submit'>
-				<Button id='subButton' variant='outlined' onClick={handleSubmit}>
-					Submit
-				</Button>
+				<div></div>
+				<div>
+					<div className='Submit'>
+						<Button id='subButton' variant='outlined' onClick={handleSubmit}>
+							Submit
+						</Button>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
