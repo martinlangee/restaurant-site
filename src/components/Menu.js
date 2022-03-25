@@ -64,7 +64,14 @@ const Menu = () => {
 	}, [category]);
 
 	return (
-		<Box>
+		<Box
+			sx={{
+				display: 'flex',
+				flexDirection: 'column',
+				justifyContent: 'center',
+				alignItems: 'center',
+			}}
+		>
 			<Box>
 				<Search>
 					<SearchIconWrapper>
@@ -118,8 +125,9 @@ const Menu = () => {
 			<Box
 				sx={{
 					display: 'grid',
-					gridTemplateColumns: '1fr 1fr 1fr',
+					gridTemplateColumns: '1fr 1fr 1fr 1fr',
 					gridGap: '10px',
+					maxWidth: '900px',
 				}}
 			>
 				{meals.map((meal) => (
