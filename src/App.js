@@ -1,5 +1,7 @@
+import Menu from "./components/Menu";
+
 const App = () => {
-  return <div>Hello</div>;
+  return <Menu />;
 };
 
 export default App;
