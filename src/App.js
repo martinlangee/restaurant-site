@@ -5,13 +5,13 @@ import Home from './conponents/Home';
 import Profil from './conponents/Profil';
 
 import { Routes, Route } from 'react-router-dom';
-const [categories, setCategories] = useState([]);
-
-useEffect(() => {
-	getAllCategories(setCategories);
-}, []);
-
 function App() {
+	const [categories, setCategories] = useState([]);
+
+	useEffect(() => {
+		getAllCategories(setCategories);
+	}, []);
+
 	return (
 		<div className='App'>
 			<header className='App-header'>
