@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from './conponents/Navbar';
 import Footer from './conponents/Footer';
 import Home from './conponents/Home';
 import Profil from './conponents/Profil';
-
 import { Routes, Route } from 'react-router-dom';
+import { getAllCategories } from './api/api.js';
+
 function App() {
 	const [categories, setCategories] = useState([]);
 
