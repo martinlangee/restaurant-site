@@ -1,22 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import getAllCategories from "./api/api";
+import { useState, useEffect } from "react";
 
 function App() {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    getAllCategories(setCategories);
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <ul>
+          {categories
+            ? categories.map((cat) => (
+                <li key={cat.idCategory}>{cat.strCategory}</li>
+              ))
+            : "Loading data..."}
+        </ul>
       </header>
     </div>
   );
