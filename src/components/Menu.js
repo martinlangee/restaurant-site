@@ -1,12 +1,20 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { Box } from "@mui/system";
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Tab,
+  Tabs,
+} from "@mui/material";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
-import { Tab, Tabs } from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -51,6 +59,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Menu = () => {
+  const [meals, setMeals] = useState([]);
+  const [category, setCategory] = useState("Pasta");
+  const [tab, setTab] = useState(0);
+
+  useEffect(() => {
+    axios
+      .get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
+      .then(({ data }) => setMeals(data.meals))
+      .catch((err) => console.error(err));
+  }, [category]);
+
   return (
     <Box>
       <Box>
@@ -59,16 +78,46 @@ const Menu = () => {
             <SearchIcon />
           </SearchIconWrapper>
           <StyledInputBase
-            placeholder="Search…"
+            placeholder="Search"
             inputProps={{ "aria-label": "search" }}
           />
         </Search>
-        <Tabs>
-          <Tab label="Appetizer" />
-          <Tab label="Main Dish" />
-          <Tab label="Dessert" />
-          <Tab label="Vegetarian" />
-          <Tab label="Vegan" />
+        <Tabs value={tab}>
+          <Tab
+            label="Pasta"
+            onClick={() => {
+              setCategory("Pasta");
+              setTab(0);
+            }}
+          />
+          <Tab
+            label="Seafood"
+            onClick={() => {
+              setCategory("Seafood");
+              setTab(1);
+            }}
+          />
+          <Tab
+            label="Vegan"
+            onClick={() => {
+              setCategory("Vegan");
+              setTab(2);
+            }}
+          />
+          <Tab
+            label="Vegetarian"
+            onClick={() => {
+              setCategory("Vegetarian");
+              setTab(3);
+            }}
+          />
+          <Tab
+            label="Dessert"
+            onClick={() => {
+              setCategory("Dessert");
+              setTab(4);
+            }}
+          />
         </Tabs>
       </Box>
       <Box>
@@ -76,38 +125,33 @@ const Menu = () => {
           Menu
         </Typography>
       </Box>
-
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-        }}
-      >
-        <Card sx={{ maxWidth: 345 }}>
-          <CardMedia
-            component="img"
-            height="200"
-            image="https://www.themealdb.com/images/media/meals/n7qnkb1630444129.jpg"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5">
-              Chivito Uruguayo
-              <ShoppingCartOutlinedIcon />
-              <FavoriteBorderOutlinedIcon />
-            </Typography>
-            <StarBorderOutlinedIcon />
-            <StarBorderOutlinedIcon />
-            <StarBorderOutlinedIcon />
-            <StarBorderOutlinedIcon />
-            <StarBorderOutlinedIcon />
-            <Typography>
-              Beef Brisket, Bread, Lettuce, Tomato, Ham, Mozzarella, Bacon, Egg,
-              Onion, Pepper
-            </Typography>
-          </CardContent>
-        </Card>
-      </Box>
+      {meals.map((meal) => (
+        <Box
+          key={meal.idMeal}
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
+          <Card sx={{ maxWidth: 345 }}>
+            <CardMedia component="img" height="200" image={meal.strMealThumb} />
+            <CardContent>
+              <Typography gutterBottom variant="h5">
+                {meal.strMeal}
+                <ShoppingCartOutlinedIcon />
+                <FavoriteBorderOutlinedIcon />
+              </Typography>
+              <StarBorderOutlinedIcon />
+              <StarBorderOutlinedIcon />
+              <StarBorderOutlinedIcon />
+              <StarBorderOutlinedIcon />
+              <StarBorderOutlinedIcon />
+              <Typography>Price</Typography>
+            </CardContent>
+          </Card>
+        </Box>
+      ))}
     </Box>
   );
 };

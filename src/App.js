@@ -1,16 +1,17 @@
 import getAllCategories from "./api/api";
 import { useState, useEffect } from "react";
+import Menu from "./components/Menu";
 
 const App = () => {
-  const [categories, setCategories] = useState([]);
+  /* const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     getAllCategories(setCategories);
-  }, []);
+  }, []); */
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div>
+      {/* <header className="App-header">
         <ul>
           {categories
             ? categories.map((cat) => (
@@ -18,7 +19,8 @@ const App = () => {
               ))
             : "Loading data..."}
         </ul>
-      </header>
+      </header> */}
+      <Menu />
     </div>
   );
 };
