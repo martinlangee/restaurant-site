@@ -34,13 +34,23 @@ www.themealdb.com/images/ingredients/Lime-Small.png
 */
 const baseUrl = "https://www.themealdb.com/api/json/v1/1/";
 
-const getDishes = (page) => {}
-
-export default async function getAllCategories(setCategories) {
+export function getAllCategories(setCategories) {
     Axios.get(`${baseUrl}categories.php`)
         .then(res => {
             setCategories(res.data.categories);
             console.log(res.data.categories);
         })
         .catch(e => console.log(e.message));
+}
+
+export async function getRandomMeals(setRandomMeals) {
+    let meals = [];
+
+    async function getRandomMeal() {
+        const meal = await Axios.get(`${baseUrl}random.php`);
+        meals.push(meal.data.meals[0]);
+    }
+
+    await Promise.all([getRandomMeal(), getRandomMeal(), getRandomMeal(), getRandomMeal(), getRandomMeal(), getRandomMeal(), getRandomMeal(), getRandomMeal(), getRandomMeal(), getRandomMeal(), ]);
+    setRandomMeals(meals);
 }
