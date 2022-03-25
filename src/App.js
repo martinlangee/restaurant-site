@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from './conponents/Navbar';
-import Footer from './conponents/Footer';
-import Home from './conponents/Home';
-import Profil from './conponents/Profil';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Home from './components/Home';
+import Profil from './components/Profil';
+import Menu from './components/Menu';
+import Basket from './components/Basket';
 import { Routes, Route } from 'react-router-dom';
 import { getAllCategories } from './api/api.js';
 
@@ -15,13 +17,15 @@ function App() {
 
 	return (
 		<div className='App'>
-			<header className='App-header'>
+			{/* <header className='App-header'>
 				<ul>{categories ? categories.map((cat) => <li key={cat.idCategory}>{cat.strCategory}</li>) : 'Loading data...'}</ul>
-			</header>
+			</header> */}
 			<Navbar />
 			<Routes>
 				<Route path='/' element={<Home />} />
 				<Route path='/profil' element={<Profil />} />
+				<Route path='/menu' element={<Menu />} />
+				<Route path='/order' element={<Basket />} />
 			</Routes>
 			<Footer />
 		</div>
