@@ -37,8 +37,9 @@ const baseUrl = "https://www.themealdb.com/api/json/v1/1/";
 export function getAllCategories(setCategories) {
     Axios.get(`${baseUrl}categories.php`)
         .then(res => {
-            setCategories(res.data.categories);
-            //console.log(res.data.categories);
+            const cats = res.data.categories;
+            setCategories(cats);
+            console.log(cats);
         })
         .catch(e => console.log(e.message));
 }
@@ -56,11 +57,55 @@ export async function getRandomMeals(setRandomMeals) {
     setRandomMeals(meals);
 }
 
+export function getMealById(setMeal, id) {
+    Axios.get(`${baseUrl}lookup.php?i=${id}`)
+        .then(res => {
+            const meal = res.data.meals[0];
+            setMeal(meal);
+            console.log(meal);
+        })
+        .catch(e => console.log(e.message));
+}
+
 export function searchMealsByName(setMeals, name) {
     Axios.get(`${baseUrl}search.php?s=${name}`)
         .then(res => {
-            setMeals(res.data.meals);
-            console.log(res.data.meals);
+            const meals = res.data.meals;
+            setMeals(meals);
+            console.log(meals);
         })
         .catch(e => console.log(e.message));
+}
+
+let currentOrders = [{
+    customerId: 123,
+    meals: [
+        { id: "52775", count: 2 },
+        { id: "52906", count: 1 },
+    ]
+}];
+
+export function addOrder(order) {
+    currentOrders.push(order);
+}
+
+export function getOrder(custId) {
+    return currentOrders.find(order => order.customerId === custId);
+}
+
+let customers = [{
+    id: 123,
+    firstName: "John",
+    lastName: "Doe",
+    address: "Central Park West 11, NY",
+    email: "johndoe@mail.to",
+    phone: "+123-456-789",
+    orders: [
+        { mealId: "52775", count: 2 },
+        { mealId: "52906", count: 1 },
+    ]
+}]
+
+export function getCustomer(id) {
+    return customers.find(cust => cust.id === id);
 }
